@@ -2,42 +2,39 @@ package routes
 
 import (
 	"backend/handlers"
-	"net/http"
+
+	"github.com/gin-contrib/cors"
+	"github.com/gin-gonic/gin"
 )
 
-// CORS middleware function
+func setupCORS(router *gin.Engine) {
+	config := cors.DefaultConfig()
+	config.AllowAllOrigins = true // Update as needed
+	config.AllowMethods = []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"}
+	config.AllowHeaders = []string{"Content-Type"}
+	config.AllowCredentials = true
 
-func withCORS(h http.HandlerFunc) http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {
-		w.Header().Set("Access-Control-Allow-Origin", "*") // Update as needed
-		w.Header().Set("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, OPTIONS")
-		w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
-		// Allow credentials if required (e.g., cookies, auth tokens)
-		w.Header().Set("Access-Control-Allow-Credentials", "true")
-
-		// Handle preflight requests
-		if r.Method == "OPTIONS" {
-			w.WriteHeader(http.StatusNoContent)
-			return
-		}
-
-		h.ServeHTTP(w, r)
-	}
+	router.Use(cors.New(config))
 }
 
-// SSE middleware function
-func withSSE(h http.HandlerFunc) http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {
-		w.Header().Set("Content-Type", "text/event-stream")
-		w.Header().Set("Cache-Control", "no-cache")
-		w.Header().Set("Connection", "keep-alive")
-		h.ServeHTTP(w, r)
-	}
-}
+// func withSSE(c *gin.Context) {
+// 	c.Writer.Header().Set("Content-Type", "text/event-stream")
+// 	c.Writer.Header().Set("Cache-Control", "no-cache")
+// 	c.Writer.Header().Set("Connection", "keep-alive")
+// 	c.Next()
+// }
 
-// RegisterRoutes registers API routes
-func RegisterRoutes() {
-	http.HandleFunc("/api/login", withCORS(handlers.Login))                                 //API LOGIN
-	http.HandleFunc("/api/subpages", withCORS(handlers.GetSubpages))                        //API SUBPAGE ACCESS
-	
+func RegisterRoutes(router *gin.Engine) {
+	setupCORS(router)
+
+	api := router.Group("/api")
+	{
+		api.POST("/login", handlers.Login)
+		api.POST("/subpages", handlers.GetSubpages)
+
+		// // // Example SSE endpoint (if needed)
+		// // api.GET("/events", withSSE(func(c *gin.Context) {
+		// 	c.String(200, "data: Hello, SSE!\n\n")
+		// }))
+	}
 }

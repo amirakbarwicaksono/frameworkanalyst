@@ -1,11 +1,7 @@
 package models
 
-import (
-	"go.mongodb.org/mongo-driver/bson/primitive"
-)
+import "go.mongodb.org/mongo-driver/bson/primitive"
 
-// Representasi Data dalam Aplikasi Untuk user login
-// Based on Reference Framework Data Analyst Lion Group
 type User struct {
 	ID         primitive.ObjectID `bson:"_id,omitempty"` // MongoDB ObjectID
 	Username   string             `bson:"username"`      // Username for login
