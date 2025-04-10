@@ -19,7 +19,15 @@
       }
     ],
     "paths": {
-      "@pages/*": ["./src/*"]
+      "@app/*": ["./src/app/*"], // Alias for the app directory
+      "@pages/*": ["./src/app/*"], // Alias for pages
+      "@components/*": ["./src/components/*"], // Example alias for components
+      "@protected": ["./src/app/components/ProtectedRoute"], // Specific alias for ProtectedRoute.tsx
+      "@navbar": ["./src/app/components/Navbar"], // Specific alias for ProtectedRoute.tsx
+      "@utils/*": ["./src/utils/*"], // Example alias for utility functions
+      "@globals": ["./src/app/globals.css"], // Alias for globals.css
+      "@context/*": ["./src/app/context/*"], // Alias for the context directory
+      "@auth": ["./src/app/context/AuthContext"] // Specific alias for AuthContext.tsx
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
