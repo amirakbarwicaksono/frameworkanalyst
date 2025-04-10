@@ -17,13 +17,6 @@ func setupCORS(router *gin.Engine) {
 	router.Use(cors.New(config))
 }
 
-// func withSSE(c *gin.Context) {
-// 	c.Writer.Header().Set("Content-Type", "text/event-stream")
-// 	c.Writer.Header().Set("Cache-Control", "no-cache")
-// 	c.Writer.Header().Set("Connection", "keep-alive")
-// 	c.Next()
-// }
-
 func RegisterRoutes(router *gin.Engine) {
 	setupCORS(router)
 
@@ -31,10 +24,6 @@ func RegisterRoutes(router *gin.Engine) {
 	{
 		api.POST("/login", handlers.Login)
 		api.POST("/subpages", handlers.GetSubpages)
-
-		// // // Example SSE endpoint (if needed)
-		// // api.GET("/events", withSSE(func(c *gin.Context) {
-		// 	c.String(200, "data: Hello, SSE!\n\n")
-		// }))
+		api.GET("/dashboard-data", handlers.GetDashboardData) // New endpoint
 	}
 }

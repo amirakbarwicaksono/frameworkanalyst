@@ -23,6 +23,9 @@
       "@pages/*": ["./src/app/*"], // Alias for pages
       "@components/*": ["./src/components/*"], // Example alias for components
       "@protected": ["./src/app/components/ProtectedRoute"], // Specific alias for ProtectedRoute.tsx
+      "@linechart": ["./src/app/components/LineChart"], // Specific alias for LineChart.tsx
+      "@piechart": ["./src/app/components/PieChart"], // Specific alias for PieChart.tsx
+      "@barchart": ["./src/app/components/BarChart"], // Specific alias for BarChart.tsx
       "@navbar": ["./src/app/components/Navbar"], // Specific alias for ProtectedRoute.tsx
       "@utils/*": ["./src/utils/*"], // Example alias for utility functions
       "@globals": ["./src/app/globals.css"], // Alias for globals.css

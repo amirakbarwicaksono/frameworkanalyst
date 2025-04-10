@@ -20,24 +20,57 @@ const Navbar = () => {
         setIsMenuOpen(!isMenuOpen);
     };
 
-const [storedUsername, setStoredUsername] = useState("");
-useEffect(() => {
-    const storedUsernamex = localStorage.getItem("username");
-    setStoredUsername(storedUsernamex||"");
-});
+    const [storedUsername, setStoredUsername] = useState("");
+    useEffect(() => {
+        const storedUsernamex = localStorage.getItem("username");
+        setStoredUsername(storedUsernamex || "");
+    }, []);
 
     return (
         <nav className="p-4 shadow-md fixed top-0 left-0 w-full z-10" style={{ backgroundColor: 'var(--navbar-bg)', color: 'var(--navbar-text)' }}>
             <div className="container mx-auto flex justify-between items-center">
                 {/* Logo Section */}
-                <Link href="/" className="flex items-center space-x-2 text-lg font-bold hover:text-gray-600">
+                <Link href="/" className="flex items-center space-x-2 text-lg font-bold hover:text-gray-600 mr-4">
                     <img
                         src="/logo.webp" // Replace with your logo path
                         alt="Logo"
                         className="h-8 w-8 rounded-full border border-black"
                     />
-                    <span>Lion Parcel</span>
+                    <span>Data Analyst</span>
                 </Link>
+
+                {/* Desktop Menu */}
+                <div className="hidden md:flex space-x-4">
+                    {storedUsername && (
+                        <div className="hover:text-gray-600 animate-bounce font-bold">
+                            Howdy, {storedUsername === "admin" ? "DA Team?" : storedUsername === "aldus" ? "Aldus?" : storedUsername === "yerrisa" ? "Yerrisa?" : storedUsername === "ryan" ? "Ryan?" : storedUsername === "christin" ? "Christin?" : storedUsername === "aurel" ? "Aurel?" : storedUsername === "lingga" ? "Lingga?" : storedUsername}
+                        </div>
+                    )}
+                    <Link href="/" className="hover:text-gray-600 font-bold">
+                        Home
+                    </Link>
+                    {isLoggedIn && (
+                        <>
+                            <Link href="/dashboard" className="hover:text-gray-600 font-bold">
+                                App
+                            </Link>
+                            <Link href="/upload" className="hover:text-gray-600 font-bold">
+                                Upload
+                            </Link>
+                            <button
+                                onClick={handleLogout}
+                                className="text-red-500 hover:text-gray-600 font-bold"
+                            >
+                                Logout
+                            </button>
+                        </>
+                    )}
+                    {!isLoggedIn && (
+                        <Link href="/login" className="hover:text-gray-600 font-bold">
+                            Login
+                        </Link>
+                    )}
+                </div>
 
                 {/* Hamburger Icon */}
                 <button
@@ -68,39 +101,6 @@ useEffect(() => {
                         )}
                     </svg>
                 </button>
-
-                {/* Desktop Menu */}
-                <div className="hidden md:flex space-x-4">
-                        {storedUsername && (
-                            <div className="hover:text-gray-600 animate-bounce font-bold">
-                                Howdy, {storedUsername === "admin" ? "DA Team?" : storedUsername === "aldus" ? "Aldus?" : storedUsername === "yerrisa" ? "Yerrisa?" : storedUsername  === "ryan" ? "Ryan?" : storedUsername === "christin" ? "Christin?" : storedUsername === "aurel" ? "Aurel?" : storedUsername  === "lingga" ? "Lingga?" : storedUsername}
-                            </div>
-                        )}	 	
-                    <Link href="/" className="hover:text-gray-600 font-bold">
-                        Home
-                    </Link>
-                    {isLoggedIn && (
-                        <>
-                            <Link href="/dashboard" className="hover:text-gray-600 font-bold">
-                                App
-                            </Link>
-                            <Link href="/upload" className="hover:text-gray-600 font-bold">
-                                Upload
-                            </Link>
-                            <button
-                                onClick={handleLogout}
-                                className="text-red-500 hover:text-gray-600 font-bold"
-                            >
-                                Logout
-                            </button>
-                        </>
-                    )}
-                    {!isLoggedIn && (
-                        <Link href="/login" className="hover:text-gray-600 font-bold">
-                            Login
-                        </Link>
-                    )}
-                </div>
             </div>
 
             {/* Mobile Menu */}

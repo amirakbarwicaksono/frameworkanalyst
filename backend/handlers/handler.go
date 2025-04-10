@@ -87,3 +87,19 @@ func GetSubpages(c *gin.Context) {
 
 	c.JSON(http.StatusOK, subpages)
 }
+
+// GetDashboardData returns dashboard data for charts and metrics
+func GetDashboardData(c *gin.Context) {
+	collection := db.GetCollection("dashboardData")
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	defer cancel()
+
+	var dashboardData map[string]interface{}
+	err := collection.FindOne(ctx, map[string]interface{}{}).Decode(&dashboardData)
+	if err != nil {
+		c.JSON(http.StatusNotFound, gin.H{"error": "Dashboard data not found"})
+		return
+	}
+
+	c.JSON(http.StatusOK, dashboardData)
+}
