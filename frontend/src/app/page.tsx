@@ -36,7 +36,7 @@ export default function Dashboard() {
   return (
     <div className="min-h-screen bg-background text-black p-4">
       {/* Header */}
-      <header className="mb-6 flex justify-between items-center">
+      <header className="mb-3 flex justify-between items-center">
         <h1 className="text-2xl font-bold">Dashboard</h1>
         <Link href="/log-history" className="px-3 py-1 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition">
           <FaClock className="inline mr-1" /> Log History
@@ -48,7 +48,7 @@ export default function Dashboard() {
         {/* Section 1: Line Chart */}
         <section className="border border-gray-300 rounded-lg p-4 bg-foreground shadow-lg">
           <h2 className="text-xl font-bold mb-4 flex items-center">
-            <FaChartLine className="mr-2" /> Line Chart
+            <FaChartLine className="mr-2" /> Pergerakan Data Perbulan
           </h2>
           {error ? (
             <p className="text-red-500 text-center">{error}</p>
@@ -62,7 +62,7 @@ export default function Dashboard() {
         {/* Section 2: Pie Chart */}
         <section className="border border-gray-300 rounded-lg p-4 bg-foreground shadow-lg">
           <h2 className="text-xl font-bold mb-4 flex items-center">
-            <FaChartPie className="mr-2" /> Pie Chart
+            <FaChartPie className="mr-2" /> Varian Data & Total
           </h2>
           {error ? (
             <p className="text-red-500 text-center">{error}</p>
@@ -76,7 +76,7 @@ export default function Dashboard() {
         {/* Section 3: Bar Chart */}
         <section className="border border-gray-300 rounded-lg p-4 bg-foreground shadow-lg">
           <h2 className="text-xl font-bold mb-4 flex items-center">
-            <FaBars className="mr-2" /> Bar Chart
+            <FaBars className="mr-2" /> Pergerakan Data Per Day
           </h2>
           {error ? (
             <p className="text-red-500 text-center">{error}</p>

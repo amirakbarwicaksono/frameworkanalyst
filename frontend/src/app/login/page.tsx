@@ -60,7 +60,7 @@ export default function LoginPage() {
                 </p>
             </header>
 
-            <div className="bg-primary p-4 rounded-lg shadow-lg w-full max-w-sm">
+            <div className="bg-black p-4 rounded-lg shadow-lg w-full max-w-sm">
                 <h2 className="text-lg font-bold mb-4 text-center text-white">Data Analyst v1.0</h2>
                 {error && <p className="text-red-500 text-sm mb-4 text-center">{error}</p>}
                 <div className="space-y-4">
